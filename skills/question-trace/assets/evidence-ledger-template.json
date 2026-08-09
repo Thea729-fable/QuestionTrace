@@ -1,0 +1,75 @@
+{
+  "run": {
+    "run_id": "",
+    "mode": "live",
+    "created_at": "",
+    "canonical_role": "",
+    "company": null,
+    "platforms": ["xiaohongshu", "nowcoder"],
+    "date_window": {"start": "", "end": ""},
+    "queries": [],
+    "stopping_condition": ""
+  },
+  "sources": [
+    {
+      "source_id": "S001",
+      "state": "candidate",
+      "platform": "xiaohongshu",
+      "canonical_url": "",
+      "post_id": "",
+      "title": "",
+      "author": "",
+      "publish_date": null,
+      "date_precision": "unknown",
+      "company": null,
+      "role": "",
+      "interview_stage": "unknown",
+      "discovery_query": "",
+      "body_status": "not_read",
+      "body_complete": false,
+      "body_length": 0,
+      "body_hash": "",
+      "media_total": 0,
+      "media_read": 0,
+      "media_irrelevant": 0,
+      "media_unreadable": 0,
+      "duplicate_of": null,
+      "included": false,
+      "exclusion_reason": "",
+      "read_events": []
+    }
+  ],
+  "images": [
+    {
+      "source_id": "S001",
+      "image_index": 1,
+      "url": "",
+      "attempted_at": "",
+      "tool": "museoncli research.visual-analyze",
+      "status": "not_read",
+      "relevance": "unknown",
+      "unreadable_reason": "",
+      "content_hash": "",
+      "questions": []
+    }
+  ],
+  "question_clusters": [
+    {
+      "question_id": "Q001",
+      "question": "",
+      "observed_variants": [],
+      "evidence_ids": [],
+      "jd_anchors": [],
+      "resume_trigger": "",
+      "scores": {
+        "frequency": 0,
+        "recency": 0,
+        "jd_relevance": 0,
+        "resume_trigger": 0,
+        "company_role_similarity": 0
+      },
+      "total_score": 0,
+      "priority": "low"
+    }
+  ]
+}

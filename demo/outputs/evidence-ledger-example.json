@@ -1,0 +1,98 @@
+{
+  "run": {
+    "run_id": "demo-replay-20260807",
+    "mode": "replay",
+    "created_at": "2026-08-09T00:00:00+08:00",
+    "canonical_role": "AI Agent产品经理",
+    "company": "阿里巴巴",
+    "platforms": [
+      "xiaohongshu"
+    ],
+    "date_window": {
+      "start": "2023-08-07",
+      "end": "2026-08-07"
+    },
+    "queries": [
+      "阿里巴巴 AI Agent产品经理 面经",
+      "AI Agent产品经理 面经",
+      "企业效率产品经理 面经"
+    ],
+    "stopping_condition": "This small ledger is an audit-script example extracted from the larger 42-source replay, not the complete demo ledger."
+  },
+  "sources": [
+    {
+      "source_id": "S001",
+      "state": "included",
+      "platform": "xiaohongshu",
+      "canonical_url": "https://www.xiaohongshu.com/explore/6a6b51d7000000003301ef15",
+      "post_id": "6a6b51d7000000003301ef15",
+      "title": "快手C端产品二面",
+      "author": "redacted in demo",
+      "publish_date": null,
+      "date_precision": "unknown",
+      "company": "快手",
+      "role": "C端产品经理（包含AI项目追问）",
+      "interview_stage": "二面",
+      "discovery_query": "AI产品经理 面经",
+      "body_status": "read",
+      "body_complete": true,
+      "body_length": 486,
+      "body_hash": "demo-source-recorded-in-local-audit",
+      "media_total": 1,
+      "media_read": 0,
+      "media_irrelevant": 1,
+      "media_unreadable": 0,
+      "duplicate_of": null,
+      "included": true,
+      "exclusion_reason": "",
+      "read_events": [
+        {
+          "resource_type": "page",
+          "attempted_at": "2026-08-07T00:00:00+08:00",
+          "tool": "museoncli research.social-media-search",
+          "status": "success",
+          "snapshot_ref": "audit-results/6a6b51d7000000003301ef15.search.json"
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "source_id": "S001",
+      "image_index": 1,
+      "url": "redacted-expiring-cdn-url",
+      "attempted_at": "2026-08-07T00:00:00+08:00",
+      "tool": "museoncli research.visual-analyze",
+      "status": "read",
+      "relevance": "irrelevant",
+      "unreadable_reason": "",
+      "content_hash": "demo-cover-image-audited",
+      "questions": []
+    }
+  ],
+  "question_clusters": [
+    {
+      "question_id": "Q001",
+      "question": "AI产品的护栏指标应该如何设计？",
+      "observed_variants": [
+        "AI产品的护栏指标怎么设计的"
+      ],
+      "evidence_ids": [
+        "S001"
+      ],
+      "jd_anchors": [
+        "数据驱动优化，建立产品效果评估体系，持续优化AI产品能力"
+      ],
+      "resume_trigger": "候选人的AI产品经历及指标提升主张会触发对指标体系的追问",
+      "scores": {
+        "frequency": 1,
+        "recency": 0,
+        "jd_relevance": 3,
+        "resume_trigger": 3,
+        "company_role_similarity": 1
+      },
+      "total_score": 8,
+      "priority": "medium"
+    }
+  ]
+}
