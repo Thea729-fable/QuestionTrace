@@ -1,5 +1,19 @@
 # Evidence and scoring model
 
+## Required runtime evidence
+
+Every ledger must contain a `run.bailian_runtime` object with:
+
+- `required: true`;
+- CLI version and `model: qwen3.5-omni-plus`;
+- `jd_resume_status: success` for the current run;
+- successful and failed call counts;
+- processed image count;
+- timestamp or output hash where available;
+- `raw_media_retained: false`.
+
+In live mode, every accessible image marked `read` or `irrelevant` must record `bailian_status: success` and the model name. An inaccessible image may record `not_run_source_blocked` only with an unreadable reason. Replay mode may preserve a disclosed historical processing tool, but it may not be represented as a new Model Studio image call.
+
 ## Source unit
 
 Count one original interview experience as one source unit. Multiple questions or images in the same post do not create additional source units. Deduplicated mirrors do not increase frequency.
@@ -82,3 +96,5 @@ Never convert this score into a percentage or claim it is a calibrated hit proba
 - A cluster missing any of interview, JD, or resume anchors cannot be high priority.
 - A source with incomplete body or unresolved relevant images cannot support an unqualified frequency claim.
 - A platform with many reposts must be deduplicated before comparison with another platform.
+- A current run without successful Model Studio JD/resume normalization cannot produce an evidence-backed bank.
+- A live source with accessible images that lack successful Model Studio processing cannot be included.

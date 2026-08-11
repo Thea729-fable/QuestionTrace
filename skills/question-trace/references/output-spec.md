@@ -24,6 +24,8 @@ Use an answer-first structure. Replace placeholders with actual evidence; do not
    - body-complete count;
    - image totals: found, read, not relevant, unreadable;
    - deduplicated source count;
+   - Model Studio runtime: CLI version, model, JD/resume normalization status, successful/failed call counts, and live interview-image processed count;
+   - data handling: raw interview media retained or discarded;
    - audit result: PASS or FAIL with exceptions.
 
 4. **Priority question bank**
@@ -44,6 +46,7 @@ Use an answer-first structure. Replace placeholders with actual evidence; do not
    - unreadable-image disclosure;
    - sample and platform limitations;
    - generated-follow-up label.
+   - third-party-content boundary: research links and minimal derived evidence only; no redistribution of raw post bodies, creator identifiers, expiring media URLs, or question images.
 
 ## High-priority question block
 
@@ -74,6 +77,8 @@ Medium and low items may be shorter, but must still distinguish observed evidenc
 - Do not cite search-result URLs when an original post URL exists.
 - Do not cite a source as fully read when the ledger says blocked, truncated, or unresolved.
 - Do not expose local credential files or temporary signed URLs when a stable public source link exists.
+- Do not reproduce full third-party posts or images in the final Markdown. Keep only the minimum question abstraction, locator, stable link, and audit metadata needed for preparation.
+- In replay mode, disclose the historical image-processing tool exactly as recorded. Never relabel a Museon-processed replay as a new Model Studio run.
 
 ## Language and naming
 

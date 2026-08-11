@@ -38,6 +38,44 @@ def audit(ledger: dict) -> dict:
     sources = ledger.get("sources", [])
     images = ledger.get("images", [])
     questions = ledger.get("question_clusters", [])
+    run = ledger.get("run", {})
+
+    if not isinstance(run, dict):
+        return {"result": "FAIL", "errors": ["run must be an object"], "warnings": []}
+
+    mode = str(run.get("mode", "")).strip()
+    if mode not in {"live", "replay"}:
+        errors.append("run.mode must be live or replay")
+
+    bailian = run.get("bailian_runtime")
+    if not isinstance(bailian, dict):
+        errors.append("run.bailian_runtime must be an object")
+        bailian = {}
+    if bailian.get("required") is not True:
+        errors.append("run.bailian_runtime.required must be true")
+    if bailian.get("model") != "qwen3.5-omni-plus":
+        errors.append("run.bailian_runtime.model must be qwen3.5-omni-plus")
+    if bailian.get("jd_resume_status") != "success":
+        errors.append("current JD/resume requires a successful Model Studio normalization call")
+    for field in ("calls_succeeded", "calls_failed", "interview_images_processed"):
+        value = bailian.get(field)
+        if not isinstance(value, int) or value < 0:
+            errors.append(f"run.bailian_runtime.{field} must be a non-negative integer")
+    if bailian.get("raw_media_retained") is not False:
+        errors.append("run.bailian_runtime.raw_media_retained must be false")
+
+    data_handling = run.get("data_handling")
+    if not isinstance(data_handling, dict):
+        errors.append("run.data_handling must be an object")
+        data_handling = {}
+    for field in (
+        "raw_post_body_retained",
+        "creator_identifier_retained",
+        "expiring_media_url_retained",
+        "raw_question_image_retained",
+    ):
+        if data_handling.get(field) is not False:
+            errors.append(f"run.data_handling.{field} must be false")
 
     if not isinstance(sources, list) or not isinstance(images, list) or not isinstance(questions, list):
         return {"result": "FAIL", "errors": ["sources, images, and question_clusters must be arrays"]}
@@ -80,6 +118,21 @@ def audit(ledger: dict) -> dict:
             errors.append(f"{prefix}: unreadable image needs unreadable_reason")
         if image.get("status") == "read" and not str(image.get("attempted_at", "")).strip():
             errors.append(f"{prefix}: read image needs attempted_at")
+        if image.get("raw_media_retained") is not False:
+            errors.append(f"{prefix}: raw_media_retained must be false")
+
+        accessible = image.get("status") == "read" and image.get("relevance") in {
+            "relevant",
+            "irrelevant",
+        }
+        if mode == "live" and accessible:
+            if image.get("bailian_status") != "success":
+                errors.append(f"{prefix}: live accessible image requires bailian_status=success")
+            if image.get("bailian_model") != "qwen3.5-omni-plus":
+                errors.append(f"{prefix}: live accessible image requires qwen3.5-omni-plus")
+        if mode == "replay" and image.get("processing_path") == "legacy_replay":
+            if not str(image.get("historical_tool", "")).strip():
+                errors.append(f"{prefix}: legacy replay image requires historical_tool disclosure")
 
     included_ids: set[str] = set()
     for source_id, source in source_by_id.items():
@@ -184,6 +237,17 @@ def audit(ledger: dict) -> dict:
     if not included_sources:
         warnings.append("no included sources; a live evidence-backed high-priority bank cannot be produced")
 
+    if mode == "live":
+        live_processed = sum(
+            image.get("bailian_status") == "success"
+            for image in images
+            if isinstance(image, dict)
+        )
+        if bailian.get("interview_images_processed") != live_processed:
+            errors.append(
+                "run.bailian_runtime.interview_images_processed must equal successful live image rows"
+            )
+
     return {
         "result": "PASS" if not errors else "FAIL",
         "summary": {
@@ -207,6 +271,24 @@ def audit(ledger: dict) -> dict:
             "questions_total": len(questions),
             "high_priority_questions": sum(
                 isinstance(item, dict) and item.get("priority") == "high" for item in questions
+            ),
+            "bailian_runtime": {
+                "required": bailian.get("required"),
+                "model": bailian.get("model"),
+                "jd_resume_status": bailian.get("jd_resume_status"),
+                "calls_succeeded": bailian.get("calls_succeeded"),
+                "calls_failed": bailian.get("calls_failed"),
+                "interview_images_processed": bailian.get("interview_images_processed"),
+                "raw_media_retained": bailian.get("raw_media_retained"),
+            },
+            "third_party_data_minimized": all(
+                data_handling.get(field) is False
+                for field in (
+                    "raw_post_body_retained",
+                    "creator_identifier_retained",
+                    "expiring_media_url_retained",
+                    "raw_question_image_retained",
+                )
             ),
         },
         "errors": errors,

@@ -8,7 +8,25 @@
     "platforms": ["xiaohongshu", "nowcoder"],
     "date_window": {"start": "", "end": ""},
     "queries": [],
-    "stopping_condition": ""
+    "stopping_condition": "",
+    "bailian_runtime": {
+      "required": true,
+      "cli_version": "",
+      "model": "qwen3.5-omni-plus",
+      "jd_resume_status": "not_run",
+      "calls_succeeded": 0,
+      "calls_failed": 0,
+      "interview_images_processed": 0,
+      "last_call_at": "",
+      "output_hash": "",
+      "raw_media_retained": false
+    },
+    "data_handling": {
+      "raw_post_body_retained": false,
+      "creator_identifier_retained": false,
+      "expiring_media_url_retained": false,
+      "raw_question_image_retained": false
+    }
   },
   "sources": [
     {
@@ -18,7 +36,7 @@
       "canonical_url": "",
       "post_id": "",
       "title": "",
-      "author": "",
+      "author": "not_retained",
       "publish_date": null,
       "date_precision": "unknown",
       "company": null,
@@ -43,13 +61,17 @@
     {
       "source_id": "S001",
       "image_index": 1,
-      "url": "",
+      "media_ref": "transient-not-retained",
       "attempted_at": "",
-      "tool": "museoncli research.visual-analyze",
+      "discovery_tool": "museoncli",
+      "extraction_tool": "aliyun-modelstudio-cli",
+      "bailian_status": "not_run",
+      "bailian_model": "qwen3.5-omni-plus",
       "status": "not_read",
       "relevance": "unknown",
       "unreadable_reason": "",
       "content_hash": "",
+      "raw_media_retained": false,
       "questions": []
     }
   ],

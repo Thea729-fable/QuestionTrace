@@ -7,7 +7,6 @@ Treat the installed schema as the source of truth. Before first use in a run, in
 ```text
 museoncli schema research.social-media-search
 museoncli schema research.web-research
-museoncli schema research.visual-analyze
 ```
 
 Do not invent flags. Parse JSON success and error responses.
@@ -22,7 +21,7 @@ Do not run unconditional authentication checks. Start recovery only when a resea
 4. If several workspaces are plausible, list them and ask the user which one to select.
 5. Resume the original research command after recovery.
 
-## Xiaohongshu discovery and deep reading
+## Xiaohongshu discovery and source reading
 
 Use the exact current schema. The expected stable flow in Museon CLI v0.5.9 is:
 
@@ -40,13 +39,7 @@ museoncli research +social-media-search --platform xhs --intent post --query "<p
 
 Search cards are discovery only. Record a source as body-complete only after the post call returns the full available body without an unresolved truncation warning.
 
-Analyze every relevant image URL. The current visual command accepts at most 12 media items per call, so batch larger carousels while preserving image order:
-
-```text
-museoncli research +visual-analyze --media <image-url> --prompt "Transcribe every interview question and stage detail visible in this image. Preserve order, mark uncertain text, and do not infer missing content."
-```
-
-When signed media cannot be prepared, follow the returned media-import guidance. If an image remains inaccessible, mark it unreadable and do not claim it was analyzed.
+Collect the ordered media references returned for each selected source, but send accessible interview images to Model Studio `qwen3.5-omni-plus` according to [bailian-runtime.md](bailian-runtime.md). Do not use Museon visual analysis as a substitute for the required Model Studio step in a new live run. If an image remains inaccessible without bypassing platform controls, mark it unreadable and do not claim it was analyzed.
 
 ## Nowcoder discovery and deep reading
 
@@ -71,3 +64,5 @@ Use Museon web research for additional public pages only after Xiaohongshu and N
 ## Risk and privacy
 
 These research commands are read-only under the inspected schema. Do not use publishing, scheduling, account mutation, or content-generation commands. Never log or expose authentication material, workspace tokens, resume contents beyond the user-requested output, or raw customer payloads.
+
+Museon is a discovery and source-reading service, not proof that third-party platform content has been licensed for redistribution. Do not bypass login walls, CAPTCHAs, robots restrictions, rate limits, or access controls. Do not commit original post bodies, author identifiers, expiring media URLs, or downloaded question images. Keep stable source links, minimal metadata, derived question text, hashes, and read statuses only. Mark blocked content honestly and exclude it from unqualified frequency claims.

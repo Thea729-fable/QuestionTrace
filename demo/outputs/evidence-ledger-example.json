@@ -17,7 +17,25 @@
       "AI Agent产品经理 面经",
       "企业效率产品经理 面经"
     ],
-    "stopping_condition": "This small ledger is an audit-script example extracted from the larger 42-source replay, not the complete demo ledger."
+    "stopping_condition": "This small ledger is an audit-script example extracted from the larger 42-source replay, not the complete demo ledger.",
+    "bailian_runtime": {
+      "required": true,
+      "cli_version": "1.14.2",
+      "model": "qwen3.5-omni-plus",
+      "jd_resume_status": "success",
+      "calls_succeeded": 1,
+      "calls_failed": 0,
+      "interview_images_processed": 0,
+      "last_call_at": "2026-08-09T00:00:00+08:00",
+      "output_hash": "demo-jd-resume-normalization-record",
+      "raw_media_retained": false
+    },
+    "data_handling": {
+      "raw_post_body_retained": false,
+      "creator_identifier_retained": false,
+      "expiring_media_url_retained": false,
+      "raw_question_image_retained": false
+    }
   },
   "sources": [
     {
@@ -60,13 +78,17 @@
     {
       "source_id": "S001",
       "image_index": 1,
-      "url": "redacted-expiring-cdn-url",
+      "media_ref": "transient-url-not-retained",
       "attempted_at": "2026-08-07T00:00:00+08:00",
-      "tool": "museoncli research.visual-analyze",
+      "processing_path": "legacy_replay",
+      "historical_tool": "museoncli research.visual-analyze",
+      "bailian_status": "not_applicable_legacy_replay",
+      "bailian_model": null,
       "status": "read",
       "relevance": "irrelevant",
       "unreadable_reason": "",
       "content_hash": "demo-cover-image-audited",
+      "raw_media_retained": false,
       "questions": []
     }
   ],

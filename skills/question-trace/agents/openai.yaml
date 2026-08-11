@@ -1,7 +1,7 @@
 interface:
   display_name: "题迹 QuestionTrace"
-  short_description: "Museon-powered interview evidence for any target role"
-  default_prompt: "Use $question-trace to analyze my uploaded JD and resume, research fresh role-specific interview experiences, and generate an evidence-backed interview question bank in Markdown."
+  short_description: "Museon retrieval + Bailian multimodal interview evidence"
+  default_prompt: "Use $question-trace to normalize my uploaded JD and resume with qwen3.5-omni-plus, research fresh role-specific interview experiences through Museon, analyze every accessible question image with Model Studio, and generate a traceable interview preparation bank in Markdown."
 
 policy:
   allow_implicit_invocation: true
